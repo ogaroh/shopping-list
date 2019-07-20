@@ -1,6 +1,2 @@
-// item model
-export interface Item {
-
-    item: string;
-    price: number;
+export class Item {
 }
