@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'Shopping List';
-  description = 'Your Shopping List';
+  description = 'MY SHOPPING LIST';
 
   itemValue = '';
   items: Observable<any[]>;
