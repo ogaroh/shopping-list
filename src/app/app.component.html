@@ -1,44 +1,49 @@
 <app-header></app-header>
 <div class="container-fluid">
-  <div style="color: #0d6777; align-content: center;">
-    <h3>ADD TO SHOPPING LIST:</h3>
-  </div>
-
-  <!-- original form -->
-  <div style="width: 400px; border: #0d6777; ">
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <!-- name -->
-        <label for="item">Item Name: </label>
-        <input type="text" class="form-control" placeholder="Item" id="item" required [(ngModel)]="itemValue"
-          name="item">
-
-        <!-- $ price -->
-        <label for="item">Price: </label>
-        <input type="number" class="form-control" placeholder="Price" id="price" required [(ngModel)]="itemValue"
-          name="item">
+  <div class="row">
+    <div class="col">
+      <div style="color: #0d6777; align-content: center;">
+        <h3>ADD ITEM:</h3>
       </div>
 
-      <!-- submit button -->
-      <div class="btn-group">
-        <button type="submit" class="btn btn-dark" style="background-color: #0d6777; color: #ffffff;"><i
-            class="fas fa-plus-circle"></i> Add</button>
-      </div>
-    </form>
-  </div>
+      <!-- original form -->
+      <div style="width: 400px; border: #0d6777; ">
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <!-- name -->
+            <label for="item">Item Name: </label>
+            <input type="text" class="form-control" placeholder="Item" id="item" required [(ngModel)]="itemValue"
+              name="item">
 
-  <!-- content from firebase -->
-  <div class="card text-center" style="width: 18rem;">
-    <div class="card-header">
-      <img src="../../../assets/img/supermarket.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-      ITEMS IN SHOPPING LIST
+            <!-- $ price -->
+            <label for="item">Price: </label>
+            <input type="number" class="form-control" placeholder="Price" id="price" required [(ngModel)]="itemValue"
+              name="item">
+          </div>
+
+          <!-- submit button -->
+          <div class="btn-group">
+            <button type="submit" class="btn btn-dark"><i
+                class="fas fa-plus-circle"></i> Add</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <pre *ngFor="let item of items | async">{{item.content}}</pre>
-      </li>
-      <hr>
-    </ul>
+
+    <!-- content from firebase -->
+    <div class="col card text-justify" style="width: 18rem;">
+      <div class="card-header">
+        <img src="../../../assets/img/supermarket.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        SHOPPING LIST
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <pre *ngFor="let item of items | async">{{item.content}}</pre>
+        </li>
+        <hr>
+      </ul>
+    </div>
   </div>
 </div>
+<hr>
 <app-footer></app-footer>
