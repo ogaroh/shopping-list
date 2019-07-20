@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
+import { Item } from './model/item';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +13,7 @@ export class AppComponent {
 
   itemValue = '';
   items: Observable<any[]>;
+  prices: Observable<an>;
 
   constructor(public db: AngularFireDatabase) {
     this.items = db.list('items').valueChanges();
