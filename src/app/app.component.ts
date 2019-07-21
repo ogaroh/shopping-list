@@ -11,9 +11,8 @@ export class AppComponent {
   title = 'Shopping List';
   description = 'MY SHOPPING LIST';
 
-  itemValue = '';
+  itemValue = ['', 0];
   items: Observable<any[]>;
-  prices: Observable<any[]>;
 
   constructor(public db: AngularFireDatabase) {
     this.items = db.list('items').valueChanges();
@@ -23,6 +22,6 @@ export class AppComponent {
   // push to backend database
   onSubmit(){
     this.db.list('items').push({ content: this.itemValue});
-    this.itemValue = '';
+    this.itemValue = ['', 0];
   }
 }
