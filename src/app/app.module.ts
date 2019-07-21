@@ -11,18 +11,12 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
-    LoginComponent,
-    SignUpComponent,
-    UserComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
