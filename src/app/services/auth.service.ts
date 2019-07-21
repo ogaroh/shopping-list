@@ -1,58 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-
-// firebase imports
 import { auth } from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
-
-// rxjs imports 
-import { Observable, of } from "rxjs";
-import { switchMap } from "rxjs/operators";
-import { User } from './user.model';
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
-  user$: Observable<User>;
-
   constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private router: Router
-  ) {
-    this.user$ = this.afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
+    public afAuth: AngularFireAuth, // Inject Firebase auth service
+  ) { }
+
+  // Sign in with Google
+  GoogleAuth() {
+    return this.AuthLogin(new auth.GoogleAuthProvider());
+  }  
+
+  // Auth logic to run auth providers
+  AuthLogin(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+    .then((result) => {
+        console.log('Successfully signed in!')
+    }).catch((error) => {
+        console.log(error)
+    })
   }
 
-  async googleSignIn() {
-    const provider = new auth.GoogleAuthProvider();
-    const credential = await this.afAuth.auth.signInWithPopup(provider);
-    return this.updateUserData(credential.user);
-  }
-
-  async signOut() {
-    await this.afAuth.auth.signOut();
-    return this.router.navigate(['/']);
-  }
-
-  private updateUserData({ uid, email, displayName, photoURL }: User) {
-    // update user information on login
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${uid}`);
-
-    const data = {
-      uid, email, displayName, photoURL
-    };
-
-    return userRef.set(data, { merge: true });
-  }
 }
